@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\website\HomeController;
+use App\Http\Controllers\website\ExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,10 @@ use App\Http\Controllers\website\HomeController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/pages/{slug}', [HomeController::class, 'pages'])->name('pages');
+
+
+
+//excel
+Route::get('/exportUsers', [ExcelController::class, 'exportUsers'])->name('exportUsers');
+Route::get('/importUsersView', [ExcelController::class, 'importUsersView'])->name('importUsersView');
+Route::post('/importUsers', [ExcelController::class, 'importUsers'])->name('importUsers');

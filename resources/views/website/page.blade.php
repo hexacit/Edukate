@@ -19,7 +19,7 @@
 
 
     <!-- About Start -->
-    <x-about-section :page="$page"/>
+    <x-about-section :page="$page" sefs=$fchfc/>
     <!-- About End -->
 
 
