@@ -16,3 +16,4 @@ use App\Http\Controllers\website\HomeController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/pages/{slug}', [HomeController::class, 'pages'])->name('pages');
+Route::get('/course/{id}', [HomeController::class, 'course'])->name('course');
