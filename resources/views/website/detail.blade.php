@@ -27,27 +27,23 @@
                             <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Course Detail</h6>
                             <h1 class="display-4">{{$course->title}}</h1>
                         </div>
-                        <img class="img-fluid rounded w-100 mb-4" src="img/header.jpg" alt="Image">
-                        <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
-                        
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem.
-                            Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam
-                            consetetur eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit
-                            gubergren dolores et, consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea
-                            sea no sed dolores diam nonumy, gubergren sit stet no diam kasd vero.</p>
+                        <img class="img-fluid rounded w-100 mb-4" src="{{$course->image}}" alt="Image">                        
+                        <p>{{$course->details}}</p>
                             <div class="courseContent">
                                 <p class="head-course">Course Content</p>
                                 <ul class="list-les">
-                                    <li>
+                                                      <li>
                                         <div class="accordion">
-                                            <p class="faqText">First Lesson :</p>
+                                            <p class="faqText">Lessons :</p>
                                             <i class="zmdi zmdi-chevron-down"></i>
                                         </div>
                                         <div class="panel default">
+                                        @if($course->lessons->count() > 0)
+                                        @foreach ($course->lessons as $lesson)         
                                             <div class="list-lessons">
                                                 <div class="name-lesson">
                                                     <i class="zmdi zmdi-play-circle-outline"></i>
-                                                    <p>Lesson one : Defining leadership</p>    
+                                                    <p>{{$lesson->title}}</p>    
                                                 </div>
                                                 <div class="act-lessons">
                                                     <time class="number-site">24 : 18 m</time>
@@ -55,73 +51,24 @@
                                                     <i class="zmdi zmdi-check"></i>
                                                 </div>
                                             </div>
-                                            <div class="list-lessons">
-                                                <div class="name-lesson">
-                                                    <i class="zmdi zmdi-play-circle-outline"></i>
-                                                    <p>Lesson Two : Defining leadership</p>    
-                                                </div>
-                                                <div class="act-lessons">
-                                                    <time class="number-site">7 : 30 m</time>
-                                                    <span>Complete</span>
-                                                    <i class="zmdi zmdi-check"></i>
-                                                </div>
-                                            </div>
-                                            <div class="list-lessons">
-                                                <div class="name-lesson">
-                                                    <i class="zmdi zmdi-play-circle-outline"></i>
-                                                    <p>Lesson Three : Defining leadership</p>    
-                                                </div>
-                                                <div class="act-lessons">
-                                                    <time class="number-site">7 : 30 m</time>
-                                                </div>
-                                            </div>
+                                             @endforeach
+                                        @else
+                                        <p>No lessons</p>
+                                        @endif
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="accordion">
-                                            <p class="faqText">First Lesson :</p>
-                                            <i class="zmdi zmdi-chevron-down"></i>
-                                        </div>
-                                        <div class="panel default">
-                                            <div class="list-lessons">
-                                                <div class="name-lesson">
-                                                    <i class="zmdi zmdi-play-circle-outline"></i>
-                                                    <p>Lesson 2: Defining leadership</p>    
-                                                </div>
-                                                <div class="act-lessons">
-                                                    <time class="number-site">7 : 30 m</time>
-                                                    <span>Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="accordion">
-                                            <p class="faqText">First Lesson :</p>
-                                            <i class="zmdi zmdi-chevron-down"></i>
-                                        </div>
-                                        <div class="panel default">
-                                            <div class="list-lessons">
-                                                <div class="name-lesson">
-                                                    <i class="zmdi zmdi-play-circle-outline"></i>
-                                                    <p>Lesson 2: Defining leadership</p>    
-                                                </div>
-                                                <div class="act-lessons">
-                                                    <time class="number-site">7 : 30 m</time>
-                                                    <span>Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                             <div class="attachments-course">
                                 <p class="head-course">Attachments</p>
+                                @if($course->attachments->count() > 0)
                                 <ul class="list-attach">
-                                    <li>
+                                @foreach ($course->attachments as $attachment)
+                                <li>
                                         <div class="name-attach">
-                                            <small><i class="icon-pdf">pdf</i></small>
-                                            <p>Software Solutions . Pdf</p>
+                                            <small><i class="icon-{{$attachment->type}}">{{$attachment->type}}</i></small>
+                                            <p>{{$attachment->file}}</p>
                                         </div>
                                         <div class="act-attach">
                                             <a>
@@ -129,56 +76,45 @@
                                             </a>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="name-attach">
-                                            <small><i class="icon-word">w</i></small>
-                                            <p>Software Solutions . Docx</p>
-                                        </div>
-                                        <div class="act-attach">
-                                            <a>
-                                                <span>Download</span>
-                                            </a>
-                                        </div>
-                                    </li>
+                                 @endforeach   
                                 </ul>
+                                @else
+                                <p>No Attachments</p>
+                                @endif
                             </div>
                             <div class="course-presenter">
                                 <p class="head-course">Course Presenter</p>
                                 <div class="sec-presenter">
                                     <figure>
-                                        <img src="img/team-3.jpg" />
+                                        <img src="{{$course->instructor->image}}" />
                                     </figure>
                                     <div class="sec-tit">
-                                        <h3>Noor Hani</h3>
-                                        <p>Blog Administrator</p>
+                                        <h3>{{$course->instructor->name}}</h3>
+                                        <p>{{$course->instructor->job}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="comment-course">
                                 <p class="head-course">A Comment</p>
+                                @if($course->comments->count() > 0)
+
                                 <ul>
+                                    @foreach ($course->comments as $comment)
                                     <li>
                                         <div class="name-cooment">
-                                            <h5>Ali Omar </h5>
-                                            <time>1 / 2 / 2020</time>
+                                            <h5>{{$comment->user->name}}</h5>
+                                            <time>{{ $comment->created_at->diffForHumans() }}</time>
                                         </div>
-                                        <p>Bring new visitors to the site, when the website is when the website is archived in a correct and sound manner  they target the clien directly through the semantic phrase keywords that visitors are Archiving websites are useful for bloggers  reerb nmfkkf their writings.</p>
+                                        <p>{{$comment->content}}.</p>
                                     </li>
-                                    <li>
-                                        <div class="name-cooment">
-                                            <h5>Ali Omar </h5>
-                                            <time>1 / 2 / 2020</time>
-                                        </div>
-                                        <p>Bring new visitors to the site, when the website is when the website is archived in a correct and sound manner  they target the clien directly through the semantic phrase keywords that visitors are Archiving websites are useful for bloggers  reerb nmfkkf their writings.</p>
-                                    </li>
-                                    <li>
-                                        <div class="name-cooment">
-                                            <h5>Ali Omar </h5>
-                                            <time>1 / 2 / 2020</time>
-                                        </div>
-                                        <p>Bring new visitors to the site, when the website is when the website is archived in a correct and sound manner  they target the clien directly through the semantic phrase keywords that visitors are Archiving websites are useful for bloggers  reerb nmfkkf their writings.</p>
-                                    </li>
+                                    @endforeach
                                 </ul>
+                                @else
+                                <ul>
+                                </ul>
+                                <p>No Comment Be First</p>
+                             </ul>
+                                @endIf
                                 <form class="add-comment">
 
                                     <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
@@ -194,50 +130,29 @@
                     </div>
 
                     <h2 class="mb-3">Related Courses</h2>
+                    @if($relatedCourses->count() > 0)
                     <div class="owl-carousel related-carousel position-relative" style="padding: 0 30px;">
-                        <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
-                            <img class="img-fluid" src="img/courses-1.jpg" alt="">
+                 
+                    @foreach ($relatedCourses as $relatedCourse)         
+                        <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="{{route('course',$relatedCourse->id)}}">
+                            <img class="img-fluid" src="{{$relatedCourse->image}}" alt="">
                             <div class="courses-text">
-                                <h4 class="text-center text-white px-3">Web design & development courses for
-                                    beginners</h4>
+                                <h4 class="text-center text-white px-3">{{$relatedCourse->title}}</h4>
                                 <div class="border-top w-100 mt-3">
                                     <div class="d-flex justify-content-between p-4">
-                                        <span class="text-white"><i class="fa fa-user mr-2"></i>Jhon Doe</span>
+                                        <span class="text-white"><i class="fa fa-user mr-2"></i>{{$relatedCourse->instructor->name}}</span>
                                         <span class="text-white"><i class="fa fa-star mr-2"></i>4.5
                                             <small>(250)</small></span>
                                     </div>
                                 </div>
                             </div>
                         </a>
-                        <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
-                            <img class="img-fluid" src="img/courses-2.jpg" alt="">
-                            <div class="courses-text">
-                                <h4 class="text-center text-white px-3">Web design & development courses for
-                                    beginners</h4>
-                                <div class="border-top w-100 mt-3">
-                                    <div class="d-flex justify-content-between p-4">
-                                        <span class="text-white"><i class="fa fa-user mr-2"></i>Jhon Doe</span>
-                                        <span class="text-white"><i class="fa fa-star mr-2"></i>4.5
-                                            <small>(250)</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="detail.html">
-                            <img class="img-fluid" src="img/courses-3.jpg" alt="">
-                            <div class="courses-text">
-                                <h4 class="text-center text-white px-3">Web design & development courses for
-                                    beginners</h4>
-                                <div class="border-top w-100 mt-3">
-                                    <div class="d-flex justify-content-between p-4">
-                                        <span class="text-white"><i class="fa fa-user mr-2"></i>Jhon Doe</span>
-                                        <span class="text-white"><i class="fa fa-star mr-2"></i>4.5
-                                            <small>(250)</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                    @endforeach  
+
                     </div>
+                    @else
+                    <p class="text-center">No Courses Yet!</p>
+                    @endIf
                </div>
 
                 <div class="col-lg-4 mt-5 mt-lg-0">
@@ -245,7 +160,7 @@
                         <h3 class="text-white py-3 px-4 m-0">Course Features</h3>
                         <div class="d-flex justify-content-between border-bottom px-4">
                             <h6 class="text-white my-3">Instructor</h6>
-                            <h6 class="text-white my-3">John Doe</h6>
+                            <h6 class="text-white my-3">{{$course->instructor->name}}</h6>
                         </div>
                         <div class="d-flex justify-content-between border-bottom px-4">
                             <h6 class="text-white my-3">Rating</h6>
@@ -261,13 +176,13 @@
                         </div>
                         <div class="d-flex justify-content-between border-bottom px-4">
                             <h6 class="text-white my-3">Skill level</h6>
-                            <h6 class="text-white my-3">All Level</h6>
+                            <h6 class="text-white my-3">{{$course->level}}</h6>
                         </div>
                         <div class="d-flex justify-content-between px-4">
                             <h6 class="text-white my-3">Language</h6>
-                            <h6 class="text-white my-3">English</h6>
+                            <h6 class="text-white my-3">{{$course->Language}}</h6>
                         </div>
-                        <h5 class="text-white py-3 px-4 m-0">Course Price: $199</h5>
+                        <h5 class="text-white py-3 px-4 m-0">Course Price: ${{$course->price}}</h5>
                         <div class="py-3 px-4">
                             <a class="btn btn-block btn-secondary py-3 px-5" href="">Enroll Now</a>
                         </div>
@@ -276,71 +191,29 @@
                     <div class="mb-5">
                         <h2 class="mb-3">Categories</h2>
                         <ul class="list-group list-group-flush">
+                            @foreach ($categories as $category)
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Design</a>
-                                <span class="badge badge-primary badge-pill">150</span>
+                                <a href="" class="text-decoration-none h6 m-0">{{$category->name}}</a>
+                                <span class="badge badge-primary badge-pill">{{$category->courses_count}}</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Web Development</a>
-                                <span class="badge badge-primary badge-pill">131</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Online Marketing</a>
-                                <span class="badge badge-primary badge-pill">78</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Keyword Research</a>
-                                <span class="badge badge-primary badge-pill">56</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                <a href="" class="text-decoration-none h6 m-0">Email Marketing</a>
-                                <span class="badge badge-primary badge-pill">98</span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="mb-5">
                         <h2 class="mb-4">Recent Courses</h2>
-                        <a class="d-flex align-items-center text-decoration-none mb-4" href="">
-                            <img class="img-fluid rounded" src="img/courses-80x80.jpg" alt="">
+                        @foreach ($recentCourses as $recentCourse) 
+                        <a class="d-flex align-items-center text-decoration-none mb-4" href="{{route('course',$recentCourse->id)}}">
+                            <img class="img-fluid rounded" src="{{$recentCourse->image}}" alt="">
                             <div class="pl-3">
-                                <h6>Web design & development courses for beginners</h6>
+                                <h6>{{$recentCourse->title}}</h6>
                                 <div class="d-flex">
-                                    <small class="text-body mr-3"><i class="fa fa-user text-primary mr-2"></i>Jhon Doe</small>
+                                    <small class="text-body mr-3"><i class="fa fa-user text-primary mr-2"></i>{{$recentCourse->instructor->name}}</small>
                                     <small class="text-body"><i class="fa fa-star text-primary mr-2"></i>4.5 (250)</small>
                                 </div>
                             </div>
                         </a>
-                        <a class="d-flex align-items-center text-decoration-none mb-4" href="">
-                            <img class="img-fluid rounded" src="img/courses-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6>Web design & development courses for beginners</h6>
-                                <div class="d-flex">
-                                    <small class="text-body mr-3"><i class="fa fa-user text-primary mr-2"></i>Jhon Doe</small>
-                                    <small class="text-body"><i class="fa fa-star text-primary mr-2"></i>4.5 (250)</small>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none mb-4" href="">
-                            <img class="img-fluid rounded" src="img/courses-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6>Web design & development courses for beginners</h6>
-                                <div class="d-flex">
-                                    <small class="text-body mr-3"><i class="fa fa-user text-primary mr-2"></i>Jhon Doe</small>
-                                    <small class="text-body"><i class="fa fa-star text-primary mr-2"></i>4.5 (250)</small>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="d-flex align-items-center text-decoration-none" href="">
-                            <img class="img-fluid rounded" src="img/courses-80x80.jpg" alt="">
-                            <div class="pl-3">
-                                <h6>Web design & development courses for beginners</h6>
-                                <div class="d-flex">
-                                    <small class="text-body mr-3"><i class="fa fa-user text-primary mr-2"></i>Jhon Doe</small>
-                                    <small class="text-body"><i class="fa fa-star text-primary mr-2"></i>4.5 (250)</small>
-                                </div>
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

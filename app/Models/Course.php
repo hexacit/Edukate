@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-
+    protected $with = ['comments','attachments','lessons'];
     protected $fillable = [
         'title',
         'image',
@@ -29,4 +29,21 @@ class Course extends Model
     {
         return $this->belongsTo(Instructor::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
+
 }

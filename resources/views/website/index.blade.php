@@ -58,7 +58,7 @@ Home Page
                     <h4 class="text-center text-white px-3">{{$course->title}}</h4>
                     <div class="border-top w-100 mt-3">
                         <div class="d-flex justify-content-between p-4">
-                            <span class="text-white"><i class="fa fa-user mr-2"></i>Jhon Doe</span>
+                            <span class="text-white"><i class="fa fa-user mr-2"></i>{{$course->instructor->name}}</span>
                             <span class="text-white"><i class="fa fa-star mr-2"></i>4.5 <small>(250)</small></span>
                         </div>
                     </div>
