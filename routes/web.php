@@ -16,6 +16,7 @@ use App\Http\Controllers\website\HomeController;
 |
 */
 Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('adminHome');
+Route::get('/admin/login', [AdminController::class, 'login'])->name('adminLogin');
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/pages/{slug}', [HomeController::class, 'pages'])->name('pages');

@@ -13,15 +13,15 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 class AdminController extends Controller
 {
     public function adminHome(){
-    //    $user = Auth::user();
-
-     //   if($user){
+        $user = Auth::user();
+    
+        if($user){
             return view('admin/index' );
-    //    }
-    //    else{
-     //       return view('admin/login' );
+    }
+        else{
+            return view('admin/login' );
    
-    //    }
+        }
     }
 
   
