@@ -86,7 +86,13 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+                @auth
+                <a href="{{route('profile')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Profile</a>
+                <a href="{{route('logout')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Logout</a>
+                @else
+                <a href="{{route('login')}}" class="btn btn-primary py-2 px-4 d-none d-lg-block">login</a>
+                @endauth
+                
             </div>
         </nav>
     </div>

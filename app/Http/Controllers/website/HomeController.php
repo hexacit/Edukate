@@ -36,7 +36,7 @@ class HomeController extends Controller
                                 ->get();
 
         // Retrieve all categories
-        $categories = Category::get();
+         $categories = Category::get();
 
         // Sort the categories in descending order based on the 'courses_count' appended value
         $categories = $categories->sortByDesc(function ($category) {

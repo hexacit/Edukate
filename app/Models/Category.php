@@ -18,7 +18,7 @@ class Category extends Model
     }
     public function getCoursesCountAttribute()
     {
-        return Course::where('Category_id',$this->id)->count();
+        return Course::where('category_id',$this->id)->count();
     }
 
 
