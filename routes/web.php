@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\CourseController;
 use App\Http\Controllers\website\HomeController;
+use Illuminate\Http\Resources\Json\ResourceResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,7 @@ use App\Http\Controllers\website\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('adminHome');
-Route::get('/admin/login', [AdminController::class, 'login'])->name('adminLogin');
+
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/pages/{slug}', [HomeController::class, 'pages'])->name('pages');
@@ -38,8 +39,20 @@ Route::get('/editpassword', [UserController::class, 'editpassword'])->name('edit
 Route::post('/editpasswordPost', [UserController::class, 'editpasswordPost'])->name('editpasswordPost');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-
-
 });
+
+
+/////////////admin
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminController::class, 'login'])->name('adminLogin');
+    Route::post('adminLoginPost', [AdminController::class, 'adminLoginPost'])->name('adminLoginPost');
+    
+    Route::group(['middleware' => ['auth']], function () {
+    
+    Route::get('/home', [AdminController::class, 'adminHome'])->name('adminHome');
+    Route::get('/adminProfile', [AdminController::class, 'adminProfile'])->name('adminProfile');
+    Route::resource('/courses', CourseController::class);    
+});
+    });
 
 
