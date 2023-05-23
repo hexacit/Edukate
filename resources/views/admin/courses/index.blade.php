@@ -10,8 +10,10 @@ Courses
             Courses
             </h2>
             <!-- CTA -->
+
             <!-- Cards -->
             <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+
               <!-- Card -->
               <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                 <div
@@ -32,14 +34,21 @@ Courses
                   <p
                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                   >
-                    {{$courses->count()}}
+                    {{$courses->total()}}
                   </p>
                 </div>
               </div>
                    </div>
+            <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-6">
+            <a href="{{url('admin/courses/create')}}" ><button class="px-10 py-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            New Course 
+            </button>
+            </a>
+              </div>
 
             <!-- New Table -->
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              
               <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
                   <thead>
@@ -115,12 +124,19 @@ Courses
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
               >
                 <span class="flex items-center col-span-3">
-                {{ $courses->links() }}
-                  
+                                  Showing {{ $courses->currentPage() }} of {{ $courses->lastPage() }}
+
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
-                Showing {{ $courses->currentPage() }} of {{ $courses->lastPage() }}
+
+
+                <!-- <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                  <nav aria-label="Table navigation"> -->
+                  {{$courses->appends($_GET)->links("pagination::bootstrap-4") }}
+
+                  <!-- </nav>
+                </span>  -->
                 <!-- <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
                   <nav aria-label="Table navigation">
                     <ul class="inline-flex items-center">
@@ -207,7 +223,7 @@ Courses
                       </li>
                     </ul>
                   </nav>
-                </span> -->
+                </span>
               </div>
             </div>
 

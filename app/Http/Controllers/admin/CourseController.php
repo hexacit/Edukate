@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
@@ -16,14 +17,18 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        $categores = Category::all();
+        return view('admin.courses.create', compact('categores'));
     }
 
     public function store(Request $request)
     {
         // Validation and saving the course to the database
-        // ...
-
+        $formFields = $request->validate([
+            'title' => 'required',
+            'category_id' => 'required',
+        ]);  
+        Course::create($formFields); ///use all field in fillable
         return redirect()->route('courses.index')->with('success', 'Course created successfully!');
     }
 
