@@ -24,7 +24,8 @@ New Course
               class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
             >
 
-            <form method="POST" action="{{url('admin/courses/')}}" >
+            <form method="POST" action="{{url('admin/courses/')}}"
+            enctype="multipart/form-data">
               @csrf
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Title</span>
@@ -35,6 +36,58 @@ New Course
                   name="title"
                 />
                 @error('title')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">price</span>
+                <input type="number"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="price"
+                  value=""
+                  name="price"
+                />
+                @error('price')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">details</span>
+                <input type="text"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="details"
+                  value=""
+                  name="details"
+                />
+                @error('details')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">language</span>
+                <input type="text"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="language"
+                  value=""
+                  name="language"
+                />
+                @error('language')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">skill_level</span>
+                <input type="text"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="skill_level"
+                  value=""
+                  name="skill_level"
+                />
+                @error('skill_level')
                 <span class="text-xs text-red-600 dark:text-red-400">
                 {{$message}}
                 </span>
@@ -60,7 +113,39 @@ New Course
                 {{$message}}
                 </span>
                 @enderror
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                instructors
+                </span>
+                <select
+                name="instructor_id"
+                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                >
+                <option value="" >Select</option>
+                @foreach($categores as $category)
+                  <option value="{{$category->id}}">{{$category->name}}</option>
+                  @endforeach
+                </select>
+              </label>
+              @error('instructor_id')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
 
+
+                <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">image</span>
+                <input type="file"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="add image"
+                  name="image"
+                />
+                @error('image')
+                <span class="text-xs text-red-600 dark:text-red-400">
+                {{$message}}
+                </span>
+                @enderror
             </div>
             <button class="px-10 py-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                   SAVE

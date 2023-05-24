@@ -45,5 +45,13 @@ class Course extends Model
         return $this->hasMany(Lesson::class);
     }
 
+    public function getImageAttribute($value)
+    {
+        if($value){
+            return url('uploads/images/course/'.$value);
+        }else{
+            return url('uploads/images/course/default.png');
+        }
+    }
 
 }

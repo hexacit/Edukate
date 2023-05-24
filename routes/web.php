@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/home', [AdminController::class, 'adminHome'])->name('adminHome');
     Route::get('/adminProfile', [AdminController::class, 'adminProfile'])->name('adminProfile');
     Route::resource('/courses', CourseController::class);    
+    Route::get('/courses/{id}/delete', [CourseController::class, 'destroy']);    
 });
     });
 

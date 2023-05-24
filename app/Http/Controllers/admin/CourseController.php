@@ -11,7 +11,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::paginate(10);
+        $courses = Course::orderby('id','desc')->paginate(10);
         return view('admin.courses.index', compact('courses'));
     }
 
@@ -25,9 +25,26 @@ class CourseController extends Controller
     {
         // Validation and saving the course to the database
         $formFields = $request->validate([
+            'image' => 'required',
             'title' => 'required',
             'category_id' => 'required',
-        ]);  
+            'price' => 'required',
+            'details' => 'required',
+            'instructor_id' => 'required',
+            'language' => 'required',
+            'skill_level' => 'required',
+        ]);
+       // $formFields['image'] = $request->file('image')->store('public/courses');
+
+       if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $extention = $image->getClientOriginalExtension();
+        $file_name = rand(1000000, 9999999) . "" . time() . "_" . rand(1000000, 9999999) . "." . $extention;
+        $image->move(public_path('uploads/images/course'),$file_name);
+        $formFields['image'] = $file_name;
+    }  
+   
+           
         Course::create($formFields); ///use all field in fillable
         return redirect()->route('courses.index')->with('success', 'Course created successfully!');
     }
@@ -46,9 +63,20 @@ class CourseController extends Controller
 
     public function update(Request $request, $id)
     {
-        return 123;
-        // Validation and updating the course in the database
-        // ...
+        $formFields = $request->validate([
+            'title' => 'required',
+        ]); 
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $extention = $image->getClientOriginalExtension();
+            $file_name = rand(1000000, 9999999) . "" . time() . "_" . rand(1000000, 9999999) . "." . $extention;
+            $image->move(public_path('uploads/images/course'),$file_name);
+            $formFields['image'] = $file_name;
+        }  
+
+        $course = Course::findOrFail($id);
+        $course->update($formFields);
 
         return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
     }
@@ -56,9 +84,8 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
-        // Logic for deleting the course from the database
-        // ...
-
+        $course->delete();
+ 
         return redirect()->route('courses.index')->with('success', 'Course deleted successfully!');
     }
 }
